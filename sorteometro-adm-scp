@@ -1,0 +1,20 @@
+#!/bin/sh
+ICATU_APP_SERVER=root@54.225.89.254
+ICATU_APP_SERVER_KEY=/root/icatu.pem
+SORTEOMETRO_CONFIG_PATH=/var/www/html/sorteometro/config
+RESULTS_PATH=/sorteometro-input-files/out
+
+#Usado quando o Sorteometro ADM é em na mesma maquina do Sorteometro Frontend
+rm -rf $SORTEOMETRO_CONFIG_PATH/anual-param-values.json
+rm -rf $SORTEOMETRO_CONFIG_PATH/odometer-param-values.json
+rm -rf $SORTEOMETRO_CONFIG_PATH/states-param-values.json
+
+mv $RESULTS_PATH/anual-param-values.json $SORTEOMETRO_CONFIG_PATH
+mv $RESULTS_PATH/odometer-param-values.json $SORTEOMETRO_CONFIG_PATH
+mv $RESULTS_PATH/states-param-values.json $SORTEOMETRO_CONFIG_PATH
+
+#Usado quando o Sorteometro ADM é em uma maquina diferente do Sorteometro Frontend
+#ssh $ICATU_APP_SERVER -i $ICATU_APP_SERVER_KEY "mkdir $SORTEOMETRO_CONFIG_PATH"
+#scp -i $ICATU_APP_SERVER_KEY $RESULTS_PATH/anual-param-values.json $ICATU_APP_SERVER:$SORTEOMETRO_CONFIG_PATH
+#scp -i $ICATU_APP_SERVER_KEY $RESULTS_PATH/odometer-param-values.json $ICATU_APP_SERVER:$SORTEOMETRO_CONFIG_PATH
+#scp -i $ICATU_APP_SERVER_KEY $RESULTS_PATH/states-param-values.json $ICATU_APP_SERVER:$SORTEOMETRO_CONFIG_PATH
